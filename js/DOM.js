@@ -64,5 +64,6 @@ removeButton.addEventListener("click", () => {
 content.append(title, text, toggleButton, promptButton, removeButton)
 
 document.body.append(content)
+document.writeln("</br>")
 document.body.append(appendedChild)
 
