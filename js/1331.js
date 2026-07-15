@@ -29,4 +29,4 @@ var arrayRankTransform = function (arr) {
   return arr;
 };
 
-rankArr(arr)
+arrayRankTransform(arr)
