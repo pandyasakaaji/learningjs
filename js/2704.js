@@ -22,8 +22,11 @@ var expect = function (val) {
   }
 };
 
-expect(5).toBe(3)
-
+try {
+  expect(5).toBe(3);
+} catch (err) {
+  console.log(err.message);
+}
 /**
  * expect(5).toBe(5); // true
  * expect(5).notToBe(5); // throws "Equal"
