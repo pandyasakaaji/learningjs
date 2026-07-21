@@ -1,11 +1,12 @@
 /**
  * @return {Function}
  */
-var createHelloWorld = function () { () => "Hello World" };
+var createHelloWorld = function () {
 
-f = createHelloWorld()
-f([])
-f([28, 48, null, {}])
+  return function (...args) {
+    return "Hello World"
+  }
+};
 
 /**
  * const f = createHelloWorld();
