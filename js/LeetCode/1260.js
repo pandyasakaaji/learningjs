@@ -11,24 +11,44 @@ var shiftGrid = function (grid, k) {
 
 };
 
-for (i = 0; i < grid.length; i++) {
-  for (j = 0; j < grid[i].length; j++) {
-    // cek j tok
-    if (j == (grid[i].length - 1)) {
-      // cek i karo j
-      if (i == (grid.length - 1) && (j == grid[i].length - 1)) {
-        console.log("i dan j")
 
+for (i = 0; i < grid.length; i++) {
+
+  let val = null
+
+  for (j = 0; j < grid[i].length; j++) {
+    console.log(`grid: ${grid[i][j]}`)
+
+    // value kabeh yang sebaris
+    if (!val) {
+      val = grid[i][j + 1]
+      grid[i][j + 1] = grid[i][j]
+    } else if (val) {
+
+      // cek j tok
+      // if (j == (grid[i].length - 1)) {
+      //   grid[i + 1][0] = grid[i][j]
+      //   // console.log("j tok")
+      //   continue
+      // }
+
+      // cek i karo j
+      if ((i == (grid.length - 1)) && (j == (grid[i].length - 1))) {
+        // console.log("i dan j")
+        grid[0][0] = grid[i][j]
+        grid[i][j] = val
         continue
       }
 
-      console.log("j tok")
-      // value kabeh yang sebaris
-    } else {
-      console.log("value roto")
+      let temp
+      temp = grid[i][j + 1]
+      grid[i][j + 1] = val
+      val = temp
     }
   }
 }
+
+console.log(grid)
 
 // rumus untuk value yang rata
 // grid[i][j] >> grid[i][j+1] 
@@ -44,4 +64,3 @@ grid.at(0).at(-1) = grid[1][0]
 grid[0][0] = grid.at(-1).at(-1)
 
 
-console.log(grid)
