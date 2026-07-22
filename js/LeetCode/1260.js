@@ -4,51 +4,62 @@
  * @return {number[][]}
  */
 
-grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-// k = 1
-
 var shiftGrid = function (grid, k) {
+  for (let i = 0; i < k; i++) {
+    let buffer, nextBuffer
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        console.log(`grid: ${grid[i][j]}`)
 
+        // cek i karo j
+        if (i == (grid.length - 1) && j == (grid[i].length - 1)) {
+          // console.log("i dan j")
+          console.log("latest value to first")
+          grid[0][0] = grid[i][j]
+          if (buffer !== undefined) {
+            grid[i][j] = buffer
+          }
+          continue
+        }
+
+        // ambil 1
+        if (j == 0) {
+          if (nextBuffer) {
+            buffer = nextBuffer
+          } else {
+            buffer = grid[i][j]
+          }
+        } else {
+          // ambil 2
+          let temp = grid[i][j]
+
+          // cek j tok
+          if (j === grid[i].length - 1) {
+            if (grid[i + 1] !== undefined) {
+              nextBuffer = grid[i + 1][0]
+              console.log(`last line, next buffer: ${nextBuffer}`)
+              grid[i + 1][0] = grid[i][j]
+            }
+          }
+
+          // isi dengan buffer (1)
+          grid[i][j] = buffer
+
+          // ganti buffer dengan 2
+          buffer = temp
+        }
+      }
+    }
+
+    console.log(grid)
+  }
+  return grid
 };
 
+const grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+let k = 9
 
-for (i = 0; i < grid.length; i++) {
-
-  let val = null
-
-  for (j = 0; j < grid[i].length; j++) {
-    console.log(`grid: ${grid[i][j]}`)
-
-    // value kabeh yang sebaris
-    if (!val) {
-      val = grid[i][j + 1]
-      grid[i][j + 1] = grid[i][j]
-    } else if (val) {
-
-      // cek j tok
-      // if (j == (grid[i].length - 1)) {
-      //   grid[i + 1][0] = grid[i][j]
-      //   // console.log("j tok")
-      //   continue
-      // }
-
-      // cek i karo j
-      if ((i == (grid.length - 1)) && (j == (grid[i].length - 1))) {
-        // console.log("i dan j")
-        grid[0][0] = grid[i][j]
-        grid[i][j] = val
-        continue
-      }
-
-      let temp
-      temp = grid[i][j + 1]
-      grid[i][j + 1] = val
-      val = temp
-    }
-  }
-}
-
-console.log(grid)
+shiftGrid(grid, k)
 
 // rumus untuk value yang rata
 // grid[i][j] >> grid[i][j+1] 
